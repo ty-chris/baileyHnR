@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from '@material-ui/core/TextField';
@@ -12,6 +13,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputAdornment from '@material-ui/core/InputAdornment';
+
+import Popup from "./Popup"
+import OtherHome from "./OtherHome"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,6 +61,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = () => {
+  let history = useHistory();
   const classes = useStyles();
   const [firstName, setFirstName] = React.useState('First Name');
   const [lastName, setLastName] = React.useState('Last Name');
@@ -74,10 +79,10 @@ const Login = () => {
   const [passwordMsg, setPasswordMsg] = React.useState('Use 8 or more characters with a mix of letters, numbers & symbols.');
   const [ageMsg, setAgeMsg] = React.useState('');
 
-  const [nameErrStatus, setNameErrStatus] = React.useState(false);
-  const [usernameErrStatus, setUsernameErrStatus] = React.useState(false);
-  const [passErrStatus, setPassErrStatus] = React.useState(false);
-  const [ageErrStatus, setAgeErrStatus] = React.useState(false);
+  const [nameErrStatus, setNameErrStatus] = React.useState(null);
+  const [usernameErrStatus, setUsernameErrStatus] = React.useState(null);
+  const [passErrStatus, setPassErrStatus] = React.useState(null);
+  const [ageErrStatus, setAgeErrStatus] = React.useState(null);
 
   const handleChange = (event, newValue) => {
     setAge(newValue);
@@ -88,8 +93,10 @@ const Login = () => {
     checkUsername();
     checkPassword();
     checkAge();
-    if (!nameErrStatus && !usernameErrStatus && !passErrStatus && !ageErrStatus){
-      
+    if (!nameErrStatus && !usernameErrStatus && !passErrStatus && !ageErrStatus && 
+      (nameErrStatus !== null || usernameErrStatus !== null || passErrStatus !== null || ageErrStatus !== null)) {
+      console.log("final:"+passErrStatus);
+      history.push('/home')
     }
   };
 
@@ -127,6 +134,7 @@ const Login = () => {
       setPasswordMsg("Password do not match.");
       setPassErrStatus(true);
     }
+    console.log("check:"+passErrStatus);
   };
 
   const checkAge = () => {
@@ -443,6 +451,9 @@ const Login = () => {
                     color="primary"
                     onClick={checkFields}>Next</Button>
                 </Grid>
+                <Grid item className={classes.button} xs={12} sm={6}>
+                  <Popup/>
+              </Grid>
               </Grid>
             </form>
           </Paper>

@@ -2,6 +2,7 @@ import React from "react";
 
 import Home from "./Home";
 import Login from "./Login";
+import OtherHome from "./OtherHome"
 import VideoDetail from "./VideoDetail";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
@@ -28,7 +29,7 @@ const App = () => {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
-            <Route path={`/videos/:videoId`} component={VideoDetail} />
+            <Route path={`/home`} component={OtherHome} />
           </Switch>
         </BrowserRouter>
       </MuiThemeProvider>

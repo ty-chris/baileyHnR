@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import AppBar from "./AppBar";
 import VideoList from "./VideoList";
+import VideoDetail from "./VideoDetail";
 import useVideos from "../hooks/useVideos";
 
 const useStyles = makeStyles((theme) => ({
@@ -42,6 +43,7 @@ const Home = () => {
       <div className={classes.home} onClick={openDialog}>
         <AppBar />
         Video List
+        <VideoDetail video={selectedVideo} />
         <VideoList onVideoSelect={setSelectedVideo} videos={videos} />
       </div>
       <Dialog open={open}>

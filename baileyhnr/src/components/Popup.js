@@ -44,12 +44,10 @@ export default function Popup() {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Totally unneccessary pop up</h2>
+      <h2 id="simple-modal-title">IMMEDIATE ACTION REQUIRED</h2>
       <p id="simple-modal-description">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        We have detected a trojan virus (e.tre293_worm) on your computer.
+        Press OK to run a quick virus scan.
       </p>
       <Popup />
     </div>
@@ -58,7 +56,7 @@ export default function Popup() {
   return (
     <div>
       <button type="button" onClick={handleOpen}>
-        Next
+        OK
       </button>
       <Modal
         open={open}

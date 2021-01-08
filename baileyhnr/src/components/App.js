@@ -1,8 +1,15 @@
+
+import React from "react";
+
+import Home from "./Home";
+import Login from "./Login";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+
 // Theme
 import { createMuiTheme } from "@material-ui/core/styles";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 
-import AppBar from "./AppBar";
+
 
 const theme = createMuiTheme({
   palette: {
@@ -19,8 +26,18 @@ const App = () => {
   return (
     <div>
       <MuiThemeProvider theme={theme}>
-        <AppBar />
-        TrollTube
+        <BrowserRouter>
+          <Switch>
+            <Route
+              exact path="/"
+              component={Home}
+            />
+            <Route
+              path="/login"
+              component={Login}
+            />
+          </Switch>
+        </BrowserRouter>
       </MuiThemeProvider>
     </div>
   );

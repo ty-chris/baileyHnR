@@ -30,7 +30,7 @@ const VideoDetail = ({ video }) => {
         url={videoSrc}
         height="100%"
         width="100%"
-        controls
+        playing
       />
     </div>
   );

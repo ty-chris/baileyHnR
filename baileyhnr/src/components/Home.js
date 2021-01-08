@@ -30,6 +30,7 @@ const Home = () => {
   };
 
   const [selectedVideo, setSelectedVideo] = useState(null);
+  
   const [videos, search] = useVideos("Rick Roll");
 
   console.log("videos", videos);
@@ -39,20 +40,19 @@ const Home = () => {
   }, [videos]);
 
   return (
-    <div>
+    <div style={{ minHeight: 4800}}>
       <div className={classes.home} onClick={openDialog}>
         <AppBar />
-        Video List
         <VideoDetail video={selectedVideo} />
         <VideoList onVideoSelect={setSelectedVideo} videos={videos} />
       </div>
-      <Dialog open={open}>
+       <Dialog open={open}>
         <Link to="/login">
           <Button variant="outlined" color="primary">
             Login to continue
           </Button>
         </Link>
-      </Dialog>
+      </Dialog> 
     </div>
   );
 };

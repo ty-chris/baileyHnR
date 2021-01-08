@@ -11,7 +11,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     position: 'fixed',
     padding: 0,
-    margin: 0,
     top: 0,
     left: 0,
     flexWrap: 'wrap',
@@ -30,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   window: {
     flexGrow: 1,
     margin: 'auto',
-    width: "60%",
+    width: "80%",
     maxWidth: "700px",
     height: "66%",
     postition: "justify",
@@ -48,8 +46,8 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     minWidth: '100%',
   },
-  
-  header:{
+
+  header: {
     color: "#202124",
     fontFamily: 'Google Sans,Noto Sans Myanmar UI,arial,sans-serif',
     fontSize: '24px',
@@ -70,8 +68,75 @@ const Login = () => {
   const [year, setYear] = React.useState('1900');
   const [age, setAge] = React.useState(1);
 
+
+  const [nameMsg, setNameMsg] = React.useState('');
+  const [usernameMsg, setUsernameMsg] = React.useState('You can use letters & numbers.');
+  const [passwordMsg, setPasswordMsg] = React.useState('Use 8 or more characters with a mix of letters, numbers & symbols.');
+  const [ageMsg, setAgeMsg] = React.useState('');
+
+  const [nameErrStatus, setNameErrStatus] = React.useState(false);
+  const [usernameErrStatus, setUsernameErrStatus] = React.useState(false);
+  const [passErrStatus, setPassErrStatus] = React.useState(false);
+  const [ageErrStatus, setAgeErrStatus] = React.useState(false);
+
   const handleChange = (event, newValue) => {
     setAge(newValue);
+  };
+
+  const checkFields = () => {
+    checkName();
+    checkUsername();
+    checkPassword();
+    checkAge();
+    if (!nameErrStatus && !usernameErrStatus && !passErrStatus && !ageErrStatus){
+      
+    }
+  };
+
+  const checkName = () => {
+    if (firstName === "" && lastName === "") {
+      setNameErrStatus(true);
+      setNameMsg("Enter first and last name.");
+    } else if (firstName === "") {
+      setNameErrStatus(true);
+      setNameMsg("Enter first name.");
+    } else if (lastName === "") {
+      setNameErrStatus(true);
+      setNameMsg("Enter last name.");
+    } else {
+      setNameErrStatus(false);
+      setNameMsg("");
+    }
+  };
+  const checkUsername = () => {
+    var patt = /[^\w]/i;
+    if (patt.test(username)) {
+      setUsernameMsg("Sorry, only letters (a-z) and numbers (0-9) are allowed.");
+      setUsernameErrStatus(true);
+    } else {
+      setUsernameMsg("You can use letters & numbers.");
+      setUsernameErrStatus(false);
+    }
+  };
+
+  const checkPassword = () => {
+    if (password === confirm) {
+      setPasswordMsg("Use 8 or more characters with a mix of letters, numbers & symbols.");
+      setPassErrStatus(false);
+    } else {
+      setPasswordMsg("Password do not match.");
+      setPassErrStatus(true);
+    }
+  };
+
+  const checkAge = () => {
+    if ((2021 - parseInt(year)) === parseInt(age)) {
+      setAgeMsg("");
+      setAgeErrStatus(false);
+    } else {
+      setAgeMsg("Age and date of birth do not match.");
+      setAgeErrStatus(true);
+    }
   };
 
   return (
@@ -88,26 +153,41 @@ const Login = () => {
           <Paper container className={classes.window} spacing={3}>
             <form
               className={classes.form} noValidate autoComplete="off"
-            //onSubmit={checkFields()}
             >
               <Grid container spacing={3}>
                 <Grid item xs={12}>
                   <span className={classes.header}>Create your TrollTube Account</span>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <TextField className={classes.field} label="First Name" variant="outlined" value={firstName} onChange={e => setFirstName(e.target.value)} />
+                  <TextField
+                    error={nameErrStatus}
+                    className={classes.field}
+                    label="First Name"
+                    variant="outlined"
+                    value={firstName}
+                    helperText={nameMsg}
+                    onChange={e => setFirstName(e.target.value)}
+                  />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <TextField className={classes.field} label="Last Name" variant="outlined" value={lastName} onChange={e => setLastName(e.target.value)} />
+                  <TextField
+                    error={nameErrStatus}
+                    className={classes.field}
+                    label="Last Name"
+                    variant="outlined"
+                    value={lastName}
+                    onChange={e => setLastName(e.target.value)}
+                  />
                 </Grid>
                 <Grid item xs={12}>
                   {/* <TextField className={classes.field} label="Username" variant="outlined" value={username} onChange={e => setUsername(e.target.value)} /> */}
                   <TextField
-                    helperText="You can use letters, numbers & periods"
                     label="Username"
+                    error={usernameErrStatus}
                     value={username}
                     className={classes.field}
                     onChange={e => setUsername(e.target.value)}
+                    helperText={usernameMsg}
                     InputProps={{
                       endAdornment: <InputAdornment position="end">@trollmail.com</InputAdornment>,
                     }}
@@ -116,11 +196,12 @@ const Login = () => {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
-                    helperText="Use 8 or more characters with a mix of letters, numbers & symbols"
                     className={classes.field}
+                    error={passErrStatus}
                     label="Password"
                     variant="outlined"
                     value={password}
+                    helperText={passwordMsg}
                     onChange={e => setPassword(e.target.value)}
                   />
                 </Grid>
@@ -128,6 +209,7 @@ const Login = () => {
                 <Grid item xs={12} sm={6}>
                   <TextField
                     className={classes.field}
+                    error={passErrStatus}
                     label="Confirm"
                     variant="outlined"
                     value={confirm}
@@ -139,7 +221,7 @@ const Login = () => {
                     Date of Birth
             </Typography></Grid>
                 <Grid item xs={12} sm={4}>
-                  <FormControl variant="outlined" className={classes.formControl}>
+                  <FormControl error={ageErrStatus} variant="outlined" className={classes.formControl}>
                     <InputLabel>Day</InputLabel>
                     <Select
                       className={classes.dropdown}
@@ -182,7 +264,7 @@ const Login = () => {
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                  <FormControl variant="outlined" className={classes.formControl}>
+                  <FormControl error={ageErrStatus} variant="outlined" className={classes.formControl}>
                     <InputLabel>Month</InputLabel>
                     <Select
                       className={classes.dropdown}
@@ -206,7 +288,7 @@ const Login = () => {
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                  <FormControl variant="outlined" className={classes.formControl}>
+                  <FormControl error={ageErrStatus} variant="outlined" className={classes.formControl}>
                     <InputLabel>Year</InputLabel>
                     <Select
                       className={classes.dropdown}
@@ -320,7 +402,7 @@ const Login = () => {
                       <MenuItem value={1917}>1917</MenuItem>
                       <MenuItem value={1916}>1916</MenuItem>
                       <MenuItem value={1915}>1915</MenuItem>
-                      <MenuItem value={1914}>19<Grid item xs={12}></Grid>14</MenuItem>
+                      <MenuItem value={1914}>1914</MenuItem>
                       <MenuItem value={1913}>1913</MenuItem>
                       <MenuItem value={1912}>1912</MenuItem>
                       <MenuItem value={1911}>1911</MenuItem>
@@ -343,18 +425,23 @@ const Login = () => {
                     Age
               </Typography>
                   <Slider
+                    error={ageErrStatus}
                     value={age}
                     min={0}
                     step={1}
                     max={100}
                     onChange={handleChange}
+                    helperText={ageMsg}
                     valueLabelDisplay="auto"
                     aria-labelledby="non-linear-slider"
                   />
                 </Grid>
 
                 <Grid item className={classes.button} xs={12} sm={6}>
-                  <Button variant="outlined" color="primary">Next</Button>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={checkFields}>Next</Button>
                 </Grid>
               </Grid>
             </form>

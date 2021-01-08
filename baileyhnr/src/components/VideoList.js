@@ -27,13 +27,16 @@ const VideoList = ({ videos, onVideoSelect }) => {
             lg={4}
             xl={3}
           >
-            <VideoItem key={video.id.videoId} video={video} />
+            <VideoItem
+              key={video.id.videoId}
+              video={video}
+              onVideoSelect={onVideoSelect}
+            />
           </Grid>
         ))}
       </Grid>
     </div>
   );
 };
-
 
 export default VideoList;

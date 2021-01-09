@@ -64,10 +64,10 @@ const Login = () => {
   let history = useHistory();
   const classes = useStyles();
   const [firstName, setFirstName] = React.useState('First Name');
-  const [lastName, setLastName] = React.useState('Last Name');
-  const [username, setUsername] = React.useState('Username');
-  const [password, setPassword] = React.useState('Password');
-  const [confirm, setConfirm] = React.useState('Confirm');
+  const [lastName, setLastName] = React.useState('');
+  const [username, setUsername] = React.useState('us3rn@me');
+  const [password, setPassword] = React.useState('');
+  const [confirm, setConfirm] = React.useState('');
   const [day, setDay] = React.useState('1');
   const [month, setMonth] = React.useState('1');
   const [year, setYear] = React.useState('1900');

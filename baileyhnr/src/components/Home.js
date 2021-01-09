@@ -84,7 +84,7 @@ const Home = () => {
           <Grid item xs={12} sm={6}>
             <Link to="/login">
               <Button variant="contained" color="primary">
-                By signing up, TrollTube accepts no liability for any damages and discomfort caused.
+                By signing up, I agree that TrollTube accepts no liability for any damages and discomfort caused to me.
               </Button>
             </Link>
           </Grid>

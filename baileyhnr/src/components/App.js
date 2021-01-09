@@ -4,7 +4,7 @@ import Home from "./Home";
 import Login from "./Login";
 import OtherHome from "./OtherHome"
 import VideoDetail from "./VideoDetail";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { HashRouter, Route, Switch } from "react-router-dom";
 
 // Theme
 import { createMuiTheme } from "@material-ui/core/styles";
@@ -25,13 +25,13 @@ const App = () => {
   return (
     <div>
       <MuiThemeProvider theme={theme}>
-        <BrowserRouter>
+        <HashRouter>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path={`/home`} component={OtherHome} />
           </Switch>
-        </BrowserRouter>
+        </HashRouter>
       </MuiThemeProvider>
     </div>
   );

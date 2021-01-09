@@ -130,6 +130,12 @@ const Login = () => {
   };
 
   const checkPassword = () => {
+    var uppCasePatt = /[A-Z]/i;
+    var lowCasePatt = /[a-z]/i;
+    var numberPatt = /[0-9]/i;
+    var chinesePatt = /[\u4E00-\u9FCC\u3400-\u4DB5\uFA0E\uFA0F\uFA11\uFA13\uFA14\uFA1F\uFA21\uFA23\uFA24\uFA27-\uFA29]|[\ud840-\ud868][\udc00-\udfff]|\ud869[\udc00-\uded6\udf00-\udfff]|[\ud86a-\ud86c][\udc00-\udfff]|\ud86d[\udc00-\udf34\udf40-\udfff]|\ud86e[\udc00-\udc1d]/i;
+
+
     if (password === "" && confirm === "") {
       setPassErrStatus(true);
       setPasswordMsg("Enter password and confirm the password.");
@@ -139,12 +145,27 @@ const Login = () => {
     } else if (confirm === "") {
       setPassErrStatus(true);
       setPasswordMsg("Confirm the password.");
-    } else if (password === confirm) {
-      setPasswordMsg("Use 8 or more characters with a mix of letters, numbers & symbols.");
-      setPassErrStatus(false);
-    } else {
+    } else if (password.length !== 9){
+      setPassErrStatus(true);
+      setPasswordMsg("Password should consist exactly 9 characters.");
+    } else if (!uppCasePatt.test(password)){
+      setPassErrStatus(true);
+      setPasswordMsg("Password should consist at least 1 uppercase alphabet.");
+    } else if (!lowCasePatt.test(password)){
+      setPassErrStatus(true);
+      setPasswordMsg("Password should consist at least 1 lowercase alphabet.");
+    } else if (!numberPatt.test(password)){
+      setPassErrStatus(true);
+      setPasswordMsg("Password should consist at least 1 number.");
+    } else if (!chinesePatt.test(password)){
+      setPassErrStatus(true);
+      setPasswordMsg("Password should consist at least 1 chinese character.");
+    } else if (password !== confirm) {
       setPasswordMsg("Password do not match.");
       setPassErrStatus(true);
+    } else {
+      setPasswordMsg("Use 9 characters with a mix of letters, numbers & chinese characters.");
+      setPassErrStatus(false);
     }
   };
 

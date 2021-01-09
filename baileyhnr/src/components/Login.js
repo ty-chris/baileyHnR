@@ -117,7 +117,10 @@ const Login = () => {
   };
   const checkUsername = () => {
     var patt = /[^\w]/i;
-    if (patt.test(username)) {
+    if (username === ""){
+      setUsernameMsg("Enter username.");
+      setUsernameErrStatus(true);
+    }else if (patt.test(username)) {
       setUsernameMsg("Sorry, only letters (a-z) and numbers (0-9) are allowed.");
       setUsernameErrStatus(true);
     } else {
@@ -127,14 +130,22 @@ const Login = () => {
   };
 
   const checkPassword = () => {
-    if (password === confirm) {
+    if (password === "" && confirm === "") {
+      setPassErrStatus(true);
+      setPasswordMsg("Enter password and confirm the password.");
+    } else if (password === "") {
+      setPassErrStatus(true);
+      setPasswordMsg("Enter password.");
+    } else if (confirm === "") {
+      setPassErrStatus(true);
+      setPasswordMsg("Confirm the password.");
+    } else if (password === confirm) {
       setPasswordMsg("Use 8 or more characters with a mix of letters, numbers & symbols.");
       setPassErrStatus(false);
     } else {
       setPasswordMsg("Password do not match.");
       setPassErrStatus(true);
     }
-    console.log("check:"+passErrStatus);
   };
 
   const checkAge = () => {

@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.js": "/baileyHnR/static/js/main.a3f8336f.chunk.js",
+    "main.js.map": "/baileyHnR/static/js/main.a3f8336f.chunk.js.map",
+    "runtime-main.js": "/baileyHnR/static/js/runtime-main.87f92829.js",
+    "runtime-main.js.map": "/baileyHnR/static/js/runtime-main.87f92829.js.map",
+    "static/js/2.62a08131.chunk.js": "/baileyHnR/static/js/2.62a08131.chunk.js",
+    "static/js/2.62a08131.chunk.js.map": "/baileyHnR/static/js/2.62a08131.chunk.js.map",
+    "index.html": "/baileyHnR/index.html",
+    "static/js/2.62a08131.chunk.js.LICENSE.txt": "/baileyHnR/static/js/2.62a08131.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.87f92829.js",
+    "static/js/2.62a08131.chunk.js",
+    "static/js/main.a3f8336f.chunk.js"
+  ]
+}

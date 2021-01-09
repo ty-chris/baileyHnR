@@ -76,7 +76,7 @@ const Login = () => {
 
   const [nameMsg, setNameMsg] = React.useState('');
   const [usernameMsg, setUsernameMsg] = React.useState('You can use letters & numbers.');
-  const [passwordMsg, setPasswordMsg] = React.useState('Use 8 or more characters with a mix of letters, numbers & symbols.');
+  const [passwordMsg, setPasswordMsg] = React.useState('Use 9 characters with a mix of letters, numbers & chinese characters.');
   const [ageMsg, setAgeMsg] = React.useState('');
 
   const [nameErrStatus, setNameErrStatus] = React.useState(null);

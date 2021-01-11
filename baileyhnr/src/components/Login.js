@@ -261,7 +261,7 @@ const Login = () => {
                     Date of Birth
             </Typography></Grid>
                 <Grid item xs={12} sm={4}>
-                  <FormControl error={ageErrStatus} variant="outlined" className={classes.formControl}>
+                  <FormControl  helperText={ageMsg} error={ageErrStatus} variant="outlined" className={classes.formControl}>
                     <InputLabel>Day</InputLabel>
                     <Select
                       className={classes.dropdown}
